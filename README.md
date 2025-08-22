@@ -1,8 +1,8 @@
 # DS-LIB
 
-A C library for data structures (starting with Stack, more to come 🚀).
+A C library for data structures (starting with Stack , Queue , more to come ).
 
-## 📂 Project Structure
+##  Project Structure
 
 include/ → Header files (.h)
 src/ → Implementations (.c)

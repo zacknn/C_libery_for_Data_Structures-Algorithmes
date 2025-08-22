@@ -1,0 +1,14 @@
+# Ignore compiled object files
+*.o
+
+# Ignore static libraries
+*.a
+
+# Ignore executables
+testprog
+
+# Ignore editor/OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

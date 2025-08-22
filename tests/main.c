@@ -7,9 +7,7 @@ int main() {
     push(s, 10);
     push(s, 20);
     push(s, 30);
-    printf("Top: %d\n", peek(s));
-    printf("Popped: %d\n", pop(s));
-    printf("Popped: %d\n", pop(s));
+    print_stack(s);
     printf("Is empty? %d\n", stack_is_empty(s));
     free_stack(s);
 
@@ -19,9 +17,7 @@ int main() {
     enqueue(q, 10);
     enqueue(q, 20);
     enqueue(q, 30);
-    printf("Front: %d\n", peak(q));
-    printf("Dequeued: %d\n", dequeue(q));
-    printf("Dequeued: %d\n", dequeue(q));
+    print_queue(q);
     printf("Is empty? %d\n", queue_is_empty(q));
     free_queue(q);
     return 0;

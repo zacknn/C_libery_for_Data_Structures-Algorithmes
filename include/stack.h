@@ -13,6 +13,6 @@ int pop(Stack* stack);
 int peek(Stack* stack);
 int stack_is_empty(Stack* stack);
 void free_stack(Stack* stack);
-
+void print_stack(Stack* stack);
 #endif
 

@@ -48,3 +48,14 @@ int free_queue(Queue *queue) {
     return 0;
 }
 
+void print_queue(Queue *queue) {
+    if (queue_is_empty(queue)) {
+        printf("Queue is empty\n");
+        return;
+    }
+    printf("Queue elements: [ ");
+    for (int i = queue->font; i <= queue->rear; i++) {
+        printf("%d ", queue->data[i]);
+    }
+    printf(" ]\n");
+}

@@ -39,3 +39,15 @@ void free_stack(Stack* stack) {
     free(stack->data);
     free(stack);
 }
+
+void print_stack(Stack* stack) {
+    if (stack->top == -1){
+        printf("Stack is empty\n");
+        return;
+    }
+    printf("Stack (bottom -> top): [ ");
+    for (int i = 0; i<= stack->top; i++){
+        printf("%d ", stack->data[i]);
+    }
+    printf("]\n");
+}

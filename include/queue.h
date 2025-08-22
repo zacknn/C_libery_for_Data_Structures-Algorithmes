@@ -16,5 +16,5 @@ int peak(Queue *queue);
 int queue_is_empty(Queue *queue);
 int size(Queue *queue);
 int free_queue(Queue *queue);
-
+void print_queue(Queue *queue);
 #endif

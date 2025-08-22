@@ -5,8 +5,11 @@ A C library for data structures (starting with Stack , Queue , more to come ).
 ##  Project Structure
 
 include/ → Header files (.h)
+
 src/ → Implementations (.c)
+
 tests/ → Example programs
+
 Makefile → Build system
 
 

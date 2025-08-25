@@ -4,6 +4,8 @@
 #include "linked_list.h"
 #include "doubly_linked_list.h"
 #include "circular_linked_list.h"
+#include "hash_set.h"
+#include "hash_map.h"
 
 int main() {
     // Stack tests
@@ -80,6 +82,42 @@ int main() {
     printf("Is list empty? %d\n", clist == NULL ? 1 : 0);
     free_circular_linked_list(&clist);
     printf("List freed, is empty? %d\n", clist == NULL ? 1 : 0);
+
+    // Hash Set tests
+    HashSet* set = create_hash_set(16);
+    printf("\nHash Set Test:\n");
+    hash_set_add(set, 10);
+    hash_set_add(set, 20);
+    hash_set_add(set, 10); // Duplicate, should not add
+    hash_set_add(set, 30);
+    hash_set_print(set);
+    printf("Size of hash set: %d\n", hash_set_size(set));
+    printf("Contains 20? %d\n", hash_set_contains(set, 20));
+    printf("Contains 40? %d\n", hash_set_contains(set, 40));
+    printf("Removed 20: %d\n", hash_set_remove(set, 20));
+    hash_set_print(set);
+    printf("Size of hash set: %d\n", hash_set_size(set));
+    hash_set_free(&set);
+    printf("Set freed, is NULL? %d\n", set == NULL ? 1 : 0);
+
+    // Hash Map tests
+    HashMap* map = create_hash_map(16);
+    printf("\nHash Map Test:\n");
+    hash_map_put(map, 1, 100);
+    hash_map_put(map, 2, 200);
+    hash_map_put(map, 1, 150); // Update value for key 1
+    hash_map_put(map, 3, 300);
+    hash_map_print(map);
+    printf("Size of hash map: %d\n", hash_map_size(map));
+    int value;
+    printf("Get key 2: %d\n", hash_map_get(map, 2, &value) ? value : -1);
+    printf("Contains key 3? %d\n", hash_map_contains_key(map, 3));
+    printf("Contains key 4? %d\n", hash_map_contains_key(map, 4));
+    printf("Removed key 2: %d\n", hash_map_remove(map, 2));
+    hash_map_print(map);
+    printf("Size of hash map: %d\n", hash_map_size(map));
+    hash_map_free(&map);
+    printf("Map freed, is NULL? %d\n", map == NULL ? 1 : 0);
 
     return 0;
 }

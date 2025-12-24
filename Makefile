@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Iinclude -Wall -Wextra
 
-SRC = src/stack.c src/queue.c src/linked_list.c src/doubly_linked_list.c src/circular_linked_list.c src/hash_set.c src/hash_map.c
+SRC = src/stack.c src/queue.c src/linked_list.c src/doubly_linked_list.c src/circular_linked_list.c src/hash_set.c src/hash_map.c src/binary_search_algorithme.c
 OBJ = $(SRC:.c=.o)
 LIB = libds.a
 

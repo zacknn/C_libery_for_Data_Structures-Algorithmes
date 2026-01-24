@@ -1,36 +1,66 @@
-CC = gcc
-CFLAGS = -Iinclude -Wall -Wextra
+CC      = gcc
+CFLAGS  = -Iinclude -Wall -Wextra
+AR      = ar
+ARFLAGS = rcs
 
-SRC = src/stack.c src/queue.c src/linked_list.c src/doubly_linked_list.c src/circular_linked_list.c src/hash_set.c src/hash_map.c src/binary_search_algorithme.c
-OBJ = $(SRC:.c=.o)
+# Directories
+SRC_DIR     = src
+TEST_DIR    = tests
+LC_DIR      = tests/leetcode_test
+
+# Library name
 LIB = libds.a
 
-LEETCODE_SRC = tests/leetcode_test/two_sum.c tests/leetcode_test/valid_parentheses.c tests/leetcode_test/contains_duplicate.c tests/leetcode_test/merge_two_sorted_lists.c
-LEETCODE_OBJ = $(LEETCODE_SRC:.c=.o)
-LEETCODE_PROGS = $(LEETCODE_SRC:tests/leetcode_test/%.c=%)
+# ===============================
+# Library sources (AUTO)
+# ===============================
+SRC := $(wildcard $(SRC_DIR)/**/*.c $(SRC_DIR)/*.c)
+OBJ := $(SRC:.c=.o)
 
+# ===============================
+# Main test
+# ===============================
+TEST_SRC = $(TEST_DIR)/main.c
+TEST_BIN = testprog
+
+# ===============================
+# LeetCode tests (AUTO)
+# ===============================
+LC_SRC  := $(wildcard $(LC_DIR)/*.c)
+LC_BIN  := $(patsubst $(LC_DIR)/%.c,$(LC_DIR)/%,$(LC_SRC))
+
+# ===============================
+# Targets
+# ===============================
 all: $(LIB) test leetcode
 
-# Build static library
+# Static library
 $(LIB): $(OBJ)
-	ar rcs $(LIB) $(OBJ)
+	$(AR) $(ARFLAGS) $@ $^
 
-# Build main test program
-test: tests/main.c $(LIB)
-	$(CC) $(CFLAGS) tests/main.c -L. -lds -o testprog
+# Generic compile rule
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Build LeetCode test programs
-leetcode: $(LEETCODE_PROGS)
+# Main test
+test: $(TEST_BIN)
 
-$(LEETCODE_PROGS): %: tests/leetcode_test/%.c $(LIB)
-	$(CC) $(CFLAGS) tests/leetcode_test/$@.c -L. -lds -o tests/leetcode_test/$@
+$(TEST_BIN): $(TEST_SRC) $(LIB)
+	$(CC) $(CFLAGS) $< -L. -lds -o $@
 
-# Run all test programs
+# LeetCode binaries
+leetcode: $(LC_BIN)
+
+$(LC_DIR)/%: $(LC_DIR)/%.c $(LIB)
+	$(CC) $(CFLAGS) $< -L. -lds -o $@
+
+# Run everything
 run: test leetcode
-	./testprog
-	$(foreach prog,$(LEETCODE_PROGS),./tests/leetcode_test/$(prog);)
+	./$(TEST_BIN)
+	@for bin in $(LC_BIN); do $$bin; done
 
 clean:
-	rm -f $(OBJ) $(LIB) testprog $(LEETCODE_OBJ) $(foreach prog,$(LEETCODE_PROGS),tests/leetcode_test/$(prog))
+	rm -f $(OBJ) $(LIB) $(TEST_BIN) $(LC_BIN)
 
 .PHONY: all test leetcode run clean
+

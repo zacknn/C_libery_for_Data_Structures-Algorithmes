@@ -4,5 +4,5 @@
 int Xor(int in);
 int And(int a, int b);
 int Or(int a, int b);
-
+int Mux(int a, int b, int sel);
 #endif // !

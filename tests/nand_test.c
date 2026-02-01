@@ -1,8 +1,7 @@
 #include "logic/logic_gates.h"
 #include "logic/nand.h"
 #include <stdio.h>
-int main()
-{
+int main() {
   // nand Test
   int a = 1, b = 1, Result;
   Result = Nand(a, b);
@@ -17,8 +16,7 @@ int main()
   };
   int selVal[2] = {1, 0};
 
-  for (int i = 0; i < 4; i++)
-  {
+  for (int i = 0; i < 4; i++) {
     int value = some_test_cases[i][0];
     printf("le not est %d :\n", Not(value));
 
@@ -28,15 +26,19 @@ int main()
     printf(" the and is %d : \n", And(value1, value2));
     printf(" the or is %d : \n", Or(value1, value2));
   }
-
-  for (int i = 0; i < 4; i++)
-  {
+  // Multiplixeur
+  for (int i = 0; i < 4; i++) {
     int value1 = selVal[i];
     int value2 = some_test_cases[i][0];
     int value3 = some_test_cases[i][1];
     printf("the Mux of sel = %d , val1 = %d , val2 = %d is : %d \n", value1,
-           value2, value3 , Mux(value2, value3, value1));
+           value2, value3, Mux(value2, value3, value1));
   }
-
+  int *outa, *outb;
+  int input = 1;
+  int selector = 1;
+  // Demiltiplixeur
+  Dmux(input, selector, &outa, &outb);
+  printf("Input: %d, Sel: %d -> a: %d, b: %d\n", input, selector, outa, outb);
   return 0;
 }

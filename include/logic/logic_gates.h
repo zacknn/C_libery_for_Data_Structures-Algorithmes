@@ -5,4 +5,5 @@ int Xor(int in);
 int And(int a, int b);
 int Or(int a, int b);
 int Mux(int a, int b, int sel);
+int Dmux(int in, int sel, int *a, int *b);
 #endif // !

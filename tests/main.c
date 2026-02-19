@@ -134,28 +134,5 @@ int main() {
     printf("Element %d not found in the array\n", target);
   }
 
-  // nand Test
-  int a = 1, b = 1, Result;
-  Result = Nand(a, b);
-  printf("the result of nand is = %d\n", Result);
-
-  // not - and - or
-  int some_test_cases[4][2] = {
-      {0, 1},
-      {0, 0},
-      {1, 0},
-      {1, 1},
-  };
-
-  for (int i = 0; i < 4; i++) {
-    int value = some_test_cases[i][0];
-    printf("le not est %d :\n", Not(value));
-
-    int value1 = some_test_cases[i][0];
-    int value2 = some_test_cases[i][1];
-
-    printf(" the and is %d : \n", And(value1, value2));
-    printf(" the or is %d : \n", Or(value1, value2));
-  }
   return 0;
 }

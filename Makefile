@@ -20,10 +20,12 @@ OBJ := $(SRC:.c=.o)
 # ===============================
 # Main tests
 # ===============================
-TEST_SRC      = $(TEST_DIR)/main.c
-TEST_BIN      = testprog
-NAND_TEST_SRC = $(TEST_DIR)/nand_test.c
-NAND_TEST_BIN = nand_test
+TEST_SRC           = $(TEST_DIR)/main.c
+TEST_BIN           = testprog
+NAND_TEST_SRC      = $(TEST_DIR)/nand_test.c
+NAND_TEST_BIN      = nand_test
+ARITMITIC_TEST_SRC = $(TEST_DIR)/aritmitic_test.c
+ARITMITIC_TEST_BIN = aritmitic_test
 
 # ===============================
 # LeetCode tests (AUTO)
@@ -45,12 +47,15 @@ $(LIB): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Main tests
-test: $(TEST_BIN) $(NAND_TEST_BIN)
+test: $(TEST_BIN) $(NAND_TEST_BIN) $(ARITMITIC_TEST_BIN)
 
 $(TEST_BIN): $(TEST_SRC) $(LIB)
 	$(CC) $(CFLAGS) $< -L. -lds -o $@
 
 $(NAND_TEST_BIN): $(NAND_TEST_SRC) $(LIB)
+	$(CC) $(CFLAGS) $< -L. -lds -o $@
+
+$(ARITMITIC_TEST_BIN): $(ARITMITIC_TEST_SRC) $(LIB)
 	$(CC) $(CFLAGS) $< -L. -lds -o $@
 
 # LeetCode binaries
@@ -63,9 +68,10 @@ $(LC_DIR)/%: $(LC_DIR)/%.c $(LIB)
 run: test leetcode
 	./$(TEST_BIN)
 	./$(NAND_TEST_BIN)
+	./$(ARITMITIC_TEST_BIN)
 	@for bin in $(LC_BIN); do $$bin; done
 
 clean:
-	rm -f $(OBJ) $(LIB) $(TEST_BIN) $(NAND_TEST_BIN) $(LC_BIN)
+	rm -f $(OBJ) $(LIB) $(TEST_BIN) $(NAND_TEST_BIN) $(ARITMITIC_TEST_BIN) $(LC_BIN)
 
 .PHONY: all test leetcode run clean

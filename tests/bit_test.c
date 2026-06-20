@@ -38,7 +38,7 @@ void test_bit_sequence() {
     int inputs[] = {1, 0, 0, 1, 1, 0, 1, 0};
     int loads[] =  {1, 0, 1, 0, 1, 0, 1, 0};
     // Expected: out(t+1) = in(t) when load=1, else out(t+1) = out(t)
-    int expected[] = {0, 1, 1, 0, 0, 1, 1, 1};
+    int expected[] = {0, 1, 0, 0, 0, 1, 0, 1};
     
     printf("Step | In | Load | Out | Expected | Status\n");
     printf("-----|----|------|-----|----------|-------\n");

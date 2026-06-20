@@ -21,16 +21,25 @@ void test_dff_basic() {
     
     printf("Initial state: %d\n", DFF_peek());
     
-    printf("Cycle 1 - Input: 1, Output: %d, State: %d\n", 
-           DFF(1), DFF_peek());
-    printf("Cycle 2 - Input: 1, Output: %d, State: %d\n", 
-           DFF(1), DFF_peek());
-    printf("Cycle 3 - Input: 0, Output: %d, State: %d\n", 
-           DFF(0), DFF_peek());
-    printf("Cycle 4 - Input: 0, Output: %d, State: %d\n", 
-           DFF(0), DFF_peek());
-    printf("Cycle 5 - Input: 1, Output: %d, State: %d\n", 
-           DFF(1), DFF_peek());
+    // Cycle 1
+    int out1 = DFF(1);  // Store output first
+    printf("Cycle 1 - Input: 1, Output: %d, State: %d\n", out1, DFF_peek());
+    
+    // Cycle 2
+    int out2 = DFF(1);
+    printf("Cycle 2 - Input: 1, Output: %d, State: %d\n", out2, DFF_peek());
+    
+    // Cycle 3
+    int out3 = DFF(0);
+    printf("Cycle 3 - Input: 0, Output: %d, State: %d\n", out3, DFF_peek());
+    
+    // Cycle 4
+    int out4 = DFF(0);
+    printf("Cycle 4 - Input: 0, Output: %d, State: %d\n", out4, DFF_peek());
+    
+    // Cycle 5
+    int out5 = DFF(1);
+    printf("Cycle 5 - Input: 1, Output: %d, State: %d\n", out5, DFF_peek());
 }
 
 void test_dff_pattern() {

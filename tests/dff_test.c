@@ -3,83 +3,62 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-// Helper to print 16-bit binary
-void print_binary(uint16_t value) {
-    for (int i = 15; i >= 0; i--) {
-        printf("%d", (value >> i) & 1);
-        if (i % 4 == 0 && i > 0) printf(" ");
-    }
-}
-
 // ============================================
 // DFF Tests
 // ============================================
 
 void test_dff_basic() {
-    printf("\n=== Test 1: Basic DFF ===\n");
-    DFF_reset();
-    
-    printf("Initial state: %d\n", DFF_peek());
-    
-    // Cycle 1
-    int out1 = DFF(1);  // Store output first
-    printf("Cycle 1 - Input: 1, Output: %d, State: %d\n", out1, DFF_peek());
-    
-    // Cycle 2
-    int out2 = DFF(1);
-    printf("Cycle 2 - Input: 1, Output: %d, State: %d\n", out2, DFF_peek());
-    
-    // Cycle 3
-    int out3 = DFF(0);
-    printf("Cycle 3 - Input: 0, Output: %d, State: %d\n", out3, DFF_peek());
-    
-    // Cycle 4
-    int out4 = DFF(0);
-    printf("Cycle 4 - Input: 0, Output: %d, State: %d\n", out4, DFF_peek());
-    
-    // Cycle 5
-    int out5 = DFF(1);
-    printf("Cycle 5 - Input: 1, Output: %d, State: %d\n", out5, DFF_peek());
+    printf("=== Test 1: Basic DFF ===\n");
+    DFF_t dff;
+    DFF_init(&dff);
+
+    printf("Initial state: %d\n", DFF_peek(&dff));
+
+    int out1 = DFF_clock(&dff, 1);
+    printf("Cycle 1 - Input: 1, Output: %d, State: %d\n", out1, DFF_peek(&dff));
+
+    int out2 = DFF_clock(&dff, 1);
+    printf("Cycle 2 - Input: 1, Output: %d, State: %d\n", out2, DFF_peek(&dff));
+
+    int out3 = DFF_clock(&dff, 0);
+    printf("Cycle 3 - Input: 0, Output: %d, State: %d\n", out3, DFF_peek(&dff));
+
+    int out4 = DFF_clock(&dff, 0);
+    printf("Cycle 4 - Input: 0, Output: %d, State: %d\n", out4, DFF_peek(&dff));
+
+    int out5 = DFF_clock(&dff, 1);
+    printf("Cycle 5 - Input: 1, Output: %d, State: %d\n", out5, DFF_peek(&dff));
 }
 
 void test_dff_pattern() {
-    printf("\n=== Test 2: DFF Pattern ===\n");
-    DFF_reset();
-    
+    printf("=== Test 2: DFF Pattern ===\n");
+    DFF_t dff;
+    DFF_init(&dff);
+
     int inputs[] = {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0};
     int num_tests = sizeof(inputs) / sizeof(inputs[0]);
-    
+
     printf("Input:  ");
     for (int i = 0; i < num_tests; i++) {
         printf("%d ", inputs[i]);
     }
     printf("\n");
-    
+
     printf("Output: ");
     for (int i = 0; i < num_tests; i++) {
-        int out = DFF(inputs[i]);
+        int out = DFF_clock(&dff, inputs[i]);
         printf("%d ", out);
     }
     printf("\n");
-    printf(" Pattern test complete: out(t+1) = in(t)\n");
+    printf("Pattern test complete: out(t+1) = in(t)\n");
 }
-
-
-// ============================================
-// Main
-// ============================================
 
 int main() {
     printf("╔═══════════════════════════════════════╗\n");
-    printf("║     DFF & MEMORY CHIP TESTS           ║\n");
+    printf("║                 DFF                   ║\n");
     printf("╚═══════════════════════════════════════╝\n");
-    
+
     test_dff_basic();
     test_dff_pattern();
-    
-    printf("\n╔═══════════════════════════════════════╗\n");
-    printf("║     ALL TESTS COMPLETED!             ║\n");
-    printf("╚═══════════════════════════════════════╝\n");
-    
     return 0;
 }

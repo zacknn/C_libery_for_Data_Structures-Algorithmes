@@ -14,18 +14,18 @@ void test_bit_basic() {
     
     printf("Initial value: %d\n", Bit_read_int(&bit));
     
-    // DFF: out(t+1) = in(t), so first output is 0, then 1
+    // DFF-backed bit register is one-cycle delayed.
     Bit_clock(&bit, 1, 1);
-    printf("After load 1: %d (expected: 0 then 1)\n", Bit_read_int(&bit));
+    printf("Cycle 1 load 1 -> out: %d (expected: 0)\n", Bit_read_int(&bit));
     
     Bit_clock(&bit, 0, 0);
-    printf("After keep: %d\n", Bit_read_int(&bit));
+    printf("Cycle 2 keep 0 -> out: %d (expected: 1)\n", Bit_read_int(&bit));
     
     Bit_clock(&bit, 0, 1);
-    printf("After load 0: %d\n", Bit_read_int(&bit));
+    printf("Cycle 3 load 0 -> out: %d (expected: 0)\n", Bit_read_int(&bit));
     
     Bit_clock(&bit, 1, 0);
-    printf("After keep: %d\n", Bit_read_int(&bit));
+    printf("Cycle 4 keep 1 -> out: %d (expected: 0)\n", Bit_read_int(&bit));
 }
 
 void test_bit_sequence() {

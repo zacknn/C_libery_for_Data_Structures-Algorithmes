@@ -12,16 +12,18 @@
  * Each call to DFF() advances the clock by one cycle.
  */
 
-// Initialize/reset the DFF state
-void DFF_reset(void);
+// DFF structure - each instance has its own state
+typedef struct {
+    uint16_t state;
+} DFF_t;
 
-// Clock the DFF: returns previous state, stores input for next cycle
-int DFF(int in);
+// Initialize a DFF
+void DFF_init(DFF_t *dff);
 
-// Get current state without advancing clock
-int DFF_peek(void);
+// Clock the DFF: returns previous state, stores input
+int DFF_clock(DFF_t *dff, int in);
 
-// Get current state as boolean
-bool DFF_peek_bool(void);
+// Peek at current state
+int DFF_peek(DFF_t *dff);
 
 #endif // DFF_H

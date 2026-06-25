@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-
+#include "logic/dff.h"
 /**
  * 1-Bit Register
  * Stores one bit of data
@@ -14,6 +14,7 @@
  */
 
 typedef struct {
+    DFF_t dff;  // Use a DFF to store the bit
     bool out;  // Current stored value
 } Bit_t;
 

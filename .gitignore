@@ -12,7 +12,7 @@ bit_test
 register_test
 nand_test
 aritmitic_test
-
+ram8_test
 # Ignore editor/OS files
 .vscode/
 .idea/

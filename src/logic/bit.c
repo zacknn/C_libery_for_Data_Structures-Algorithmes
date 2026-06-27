@@ -10,8 +10,8 @@ void Bit_clock(Bit_t *bit, int in, int load) {
     in = in ? 1 : 0;
     load = load ? 1 : 0;
     
-    int current_out = bit->out ? 1 : 0;
-    int mux_out = Mux(current_out, in, load);
+    int current_state = DFF_peek(&bit->dff);
+    int mux_out = Mux(current_state, in, load);
     int new_out = DFF_clock(&bit->dff, mux_out);
     bit->out = new_out ? true : false;
 }

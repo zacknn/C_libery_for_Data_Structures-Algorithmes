@@ -21,8 +21,8 @@ int Mux(int a, int b, int sel) {
 
 void DMux(int in, int sel, int *a, int *b) {
   int selNot = Not(sel);
-  *a = And(in, sel);
-  *b = And(in, selNot);
+  *a = And(in, selNot);
+  *b = And(in, sel);
 }
 // 16-bit gates
 void Not16(uint16_t in[16], uint16_t out[16]) {
@@ -77,7 +77,11 @@ void Mux8Way16(uint16_t a[16], uint16_t b[16], uint16_t c[16], uint16_t d[16],
 
 void DMux4Way(int in, uint16_t sel[2], int *a, int *b, int *c, int *d) {
   int dmux_ab, dmux_cd;
+  
+  
   DMux(in, sel[1], &dmux_ab, &dmux_cd);
+  
+
   DMux(dmux_ab, sel[0], a, b);
   DMux(dmux_cd, sel[0], c, d);
 }
@@ -85,7 +89,9 @@ void DMux4Way(int in, uint16_t sel[2], int *a, int *b, int *c, int *d) {
 void DMux8Way(int in, uint16_t sel[3], int *a, int *b, int *c, int *d, int *e,
               int *f, int *g, int *h) {
   int dmux_abcd, dmux_efgh;
+
   DMux(in, sel[2], &dmux_abcd, &dmux_efgh);
-  DMux4Way(dmux_abcd, sel, a, b, c, d);
-  DMux4Way(dmux_efgh, sel, e, f, g, h);
+  uint16_t sel_lower[2] = {sel[0], sel[1]};
+  DMux4Way(dmux_abcd, sel_lower, a, b, c, d);
+  DMux4Way(dmux_efgh, sel_lower, e, f, g, h);
 }

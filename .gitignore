@@ -13,6 +13,7 @@ register_test
 nand_test
 aritmitic_test
 ram8_test
+ram64_test
 # Ignore editor/OS files
 .vscode/
 .idea/
